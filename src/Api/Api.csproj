@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Include="Config\ApiVersioningSetup.cs"/>
+        <Compile Include="Controllers\v1\UserController.cs"/>
+        <Compile Include="Endpoints\HealthEndpoints.cs"/>
+        <Compile Include="Extensions\ServiceCollectionExtensions.cs"/>
+        <Compile Include="Filters\GlobalExceptionFilter.cs"/>
+        <Compile Include="Mapping\UserMappingProfile.cs"/>
+        <Compile Include="Middlewares\ExceptionHandlingMiddleware.cs"/>
+    </ItemGroup>
+
+</Project>
