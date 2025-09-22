@@ -1,4 +1,6 @@
-﻿namespace Api.Config;
+﻿using Asp.Versioning;
+
+namespace Api.Config;
 
 public static class ApiVersioningSetup
 {

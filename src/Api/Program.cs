@@ -2,6 +2,8 @@ using Api.Config;
 using Api.Endpoints;
 using Api.Extensions;
 using Api.Middlewares;
+using Application;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 

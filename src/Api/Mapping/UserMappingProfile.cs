@@ -1,4 +1,8 @@
-﻿namespace Api.Mapping;
+﻿using AutoMapper;
+using Contracts.v1.Users;
+using Domain.Users;
+
+namespace Api.Mapping;
 
 public sealed class UserMappingProfile : Profile
 {

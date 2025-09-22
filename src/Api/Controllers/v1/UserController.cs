@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Features.Users.Commands.CreateUser;
+using Application.Features.Users.Queries.GetUserById;
+using Contracts.v1.Users;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers.v1;
 
