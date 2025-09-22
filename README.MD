@@ -1,32 +1,26 @@
-﻿# Project Name
+﻿# Clean Architecture Starter
 
-## Description
-A starter project for a C# Web API using ASP.NET Core.
-
-## Features
-- [x] Clean architecture
-- [x] Serilog
-- [x] Swagger
-- [x] Entity Framework Core
-- [x] Docker integration
-- [x] Dependency injection
-- [x] CQRS pattern
-- [x] MediatR
-
-## Getting Started
-Instructions on how to get a copy of the project up and running on your local machine for development and testing purposes.
+### Instructions
+Use `dotnet build` or the CI pipeline. Add custom scripts here.
 
 ### Prerequisites
 - .NET 9.0 SDK or later
 
-### Installation
-A step-by-step series of examples that tell you how to get a development environment running.
+### References
+- **Api** references: `Application`, `Contracts`, `Infrastructure`
+- **Application** references: `Domain`, `Contracts`
+- **Infrastructure** references: `Application`, `Domain`
+- **Contracts** no project references
+- **SharedKernel** referenced by `Domain` (and others if needed)
 
-## Usage
-Instructions and examples for using the project.
+## Features
+- [x] Clean architecture
+- [x] Global exception filter & middleware
+- [x] Api versioning
+- [x] Serilog
+- [x] Swagger
+- [x] Entity Framework Core
+- [x] Dependency injection
+- [x] CQRS pattern
+- [x] MediatR
 
-## Contributing
-Guidelines for contributing to the project.
-
-## License
-This project is licensed under the MIT License - see the `LICENSE` file for details.
