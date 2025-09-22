@@ -24,9 +24,9 @@ public class CreateUserCommandTests
             /* no providers needed for tests */
         });
 
-        var mapper = new MapperConfiguration(cfg => 
+        var mapper = new MapperConfiguration(cfg =>
                 cfg.CreateMap<User, UserResponse>()
-                    .ForCtorParam("FullName", o => o.MapFrom(s => s.FullName)), 
+                    .ForCtorParam("FullName", o => o.MapFrom(s => s.FullName)),
             loggerFactory
         ).CreateMapper();
 

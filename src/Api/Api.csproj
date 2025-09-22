@@ -15,18 +15,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Include="Config\ApiVersioningSetup.cs"/>
-        <Compile Include="Controllers\v1\UserController.cs"/>
-        <Compile Include="Endpoints\HealthEndpoints.cs"/>
-        <Compile Include="Extensions\ServiceCollectionExtensions.cs"/>
-        <Compile Include="Filters\GlobalExceptionFilter.cs"/>
-        <Compile Include="Mapping\UserMappingProfile.cs"/>
-        <Compile Include="Middlewares\ExceptionHandlingMiddleware.cs"/>
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\Contracts\Contracts.csproj" />
       <ProjectReference Include="..\Application\Application.csproj" />
+      <ProjectReference Include="..\Contracts\Contracts.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 

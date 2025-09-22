@@ -15,7 +15,7 @@ public class CreateUserEndpointTests : IClassFixture<WebAppFactoryFixture>
     public async Task Post_Creates_User()
     {
         var client = _fx.Client;
-        var res = await client.PostAsJsonAsync("/api/v1/users", new CreateUserRequest("a@b.com","Ada","Lovelace"));
+        var res = await client.PostAsJsonAsync("/api/v1/users", new CreateUserRequest("a@b.com", "Ada", "Lovelace"));
         res.EnsureSuccessStatusCode();
         var dto = await res.Content.ReadFromJsonAsync<UserResponse>();
         Assert.NotNull(dto);

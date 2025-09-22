@@ -10,6 +10,6 @@ public class WebAppFactoryFixture : WebApplicationFactory<Program>
     {
         // This creates an in-memory test server and HttpClient
         // base address will be set automatically
-        Client = CreateClient(); 
+        Client = CreateClient();
     }
 }
