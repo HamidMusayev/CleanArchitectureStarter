@@ -1,19 +1,21 @@
 ﻿services:
   webapi:
     container_name: my-api
-    #image: api:latest
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "5000:80"
+      - "5000:8080"
     depends_on:
       - postgres
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-  
+      - ConnectionStrings__Default=Host=postgres;Port=5432;Database=test_db;Username=dis;Password=dis
+    networks:
+      - backend
+
   postgres:
-    image: postgres:latest
+    image: postgres:17
     container_name: my-postgres
     environment:
       POSTGRES_USER: dis
@@ -25,6 +27,11 @@
       - backend
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U dis -d test_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -33,7 +40,7 @@
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "8080:80"  # pgAdmin will be accessible on port 8080
+      - "8080:80"
     depends_on:
       - postgres
     networks:
@@ -44,4 +51,3 @@ networks:
 
 volumes:
   postgres_data:
-

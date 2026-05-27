@@ -1,3 +1,5 @@
-﻿namespace Domain.Common;
+﻿using MediatR;
 
-public abstract record DomainEvent(DateTime OccurredOn);
+namespace Domain.Common;
+
+public abstract record DomainEvent(DateTime OccurredOn) : INotification;

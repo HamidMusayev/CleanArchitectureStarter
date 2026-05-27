@@ -6,8 +6,13 @@ namespace Domain.Users.ValueObjects;
 public sealed class Email : ValueObject
 {
     private static readonly Regex Rx = new(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled);
+
+    private Email(string value)
+    {
+        Value = value.ToLowerInvariant();
+    }
+
     public string Value { get; }
-    private Email(string value) => Value = value.ToLowerInvariant();
 
     public static Email Create(string value)
     {
@@ -21,5 +26,8 @@ public sealed class Email : ValueObject
         yield return Value;
     }
 
-    public override string ToString() => Value;
+    public override string ToString()
+    {
+        return Value;
+    }
 }

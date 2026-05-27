@@ -1,5 +1,9 @@
-﻿using Application.Abstractions.Persistence;
+﻿using Application.Abstractions;
+using Application.Abstractions.Messaging;
+using Application.Abstractions.Persistence;
+using Application.Common.Interfaces;
 using Domain.Repositories;
+using Infrastructure.Interceptors;
 using Infrastructure.Persistence;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
@@ -11,18 +15,35 @@ namespace Infrastructure;
 
 public static class DependencyInjection
 {
-    private sealed class EfUnitOfWork(MyAppDbContext db) : IUnitOfWork
-    {
-        public Task<int> SaveChangesAsync(CancellationToken ct = default) => db.SaveChangesAsync(ct);
-    }
-
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration config)
     {
-        services.AddDbContext<MyAppDbContext>(o =>
-            o.UseNpgsql(config.GetConnectionString("Default")));
+        services.AddHttpContextAccessor();
+        services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
+        services.AddScoped<IDomainEventDispatcher, MediatRDomainEventDispatcher>();
+        services.AddSingleton<AuditableEntitySaveChangesInterceptor>();
+
+        services.AddDbContext<MyAppDbContext>((sp, o) =>
+        {
+            o.UseNpgsql(config.GetConnectionString("Default"));
+            o.AddInterceptors(sp.GetRequiredService<AuditableEntitySaveChangesInterceptor>());
+        });
+
         services.AddScoped<IUnitOfWork, EfUnitOfWork>();
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddSingleton<Application.Abstractions.Messaging.IEmailSender, EmailSender>();
+        services.AddSingleton<IEmailSender, EmailSender>();
+
+        services.AddMemoryCache();
+        services.AddSingleton<ICacheService, MemoryCacheService>();
+
         return services;
+    }
+
+    private sealed class EfUnitOfWork(MyAppDbContext db) : IUnitOfWork
+    {
+        public Task<int> SaveChangesAsync(CancellationToken ct = default)
+        {
+            return db.SaveChangesAsync(ct);
+        }
     }
 }

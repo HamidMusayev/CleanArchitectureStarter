@@ -1,6 +1,5 @@
 ﻿using System.Net.Http.Json;
 using Contracts.v1.Users;
-using Xunit;
 
 namespace IntegrationTests.Api.Users;
 
@@ -9,7 +8,11 @@ namespace IntegrationTests.Api.Users;
 public class CreateUserEndpointTests : IClassFixture<WebAppFactoryFixture>
 {
     private readonly WebAppFactoryFixture _fx;
-    public CreateUserEndpointTests(WebAppFactoryFixture fx) => _fx = fx;
+
+    public CreateUserEndpointTests(WebAppFactoryFixture fx)
+    {
+        _fx = fx;
+    }
 
     [Fact]
     public async Task Post_Creates_User()

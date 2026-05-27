@@ -16,8 +16,8 @@ public class UsersController(IMediator mediator) : ControllerBase
         var result = await mediator.Send(new CreateUserCommand(request.Email, request.GivenName, request.FamilyName),
             ct);
         return result.IsSuccess
-            ? CreatedAtAction(nameof(GetById), new { id = result.Value.Id }, result.Value)
-            : Problem(title: result.Error.Code, detail: result.Error.Description, statusCode: 400);
+            ? CreatedAtAction(nameof(GetById), new { id = result.Value!.Id }, result.Value)
+            : Problem(title: result.Error!.Code, detail: result.Error.Description, statusCode: 400);
     }
 
     [HttpGet("{id:guid}")]

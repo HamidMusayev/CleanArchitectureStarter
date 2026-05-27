@@ -1,5 +1,5 @@
 <Project>
-  <Target Name="PostBuildEcho" AfterTargets="Build">
-    <Message Text="Build complete for @(ProjectFullPath)" Importance="Low" />
-  </Target>
+    <Target Name="PostBuildEcho" AfterTargets="Build">
+        <Message Text="Build complete for @(ProjectFullPath)" Importance="Low"/>
+    </Target>
 </Project>

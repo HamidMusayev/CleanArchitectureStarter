@@ -11,10 +11,8 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
         b.ToTable("Users");
         b.HasKey(x => x.Id);
         b.Property(x => x.CreatedAt).IsRequired();
-        b.OwnsOne(x => x.Email, e =>
-        {
-            e.Property(p => p.Value).HasColumnName("Email").HasMaxLength(256).IsRequired();
-        });
+        b.OwnsOne(x => x.Email,
+            e => { e.Property(p => p.Value).HasColumnName("Email").HasMaxLength(256).IsRequired(); });
         b.Ignore(x => x.DomainEvents);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Domain.Users;
-using Xunit;
 
 namespace UnitTests.Domain.Users;
 
