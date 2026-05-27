@@ -1,5 +1,4 @@
 using System.Text;
-using Api.Filters;
 using Api.Middlewares;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,7 +12,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApiLayer(this IServiceCollection services, IConfiguration config)
     {
-        services.AddControllers(o => o.Filters.Add<GlobalExceptionFilter>());
+        services.AddControllers();
         services.AddTransient<ExceptionHandlingMiddleware>();
         services.AddEndpointsApiExplorer();
 

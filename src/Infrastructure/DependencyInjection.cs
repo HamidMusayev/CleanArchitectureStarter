@@ -1,4 +1,4 @@
-﻿using Application.Abstractions;
+using Application.Abstractions;
 using Application.Abstractions.Messaging;
 using Application.Abstractions.Persistence;
 using Application.Common.Interfaces;
@@ -32,6 +32,9 @@ public static class DependencyInjection
         services.AddScoped<IUnitOfWork, EfUnitOfWork>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddSingleton<IEmailSender, EmailSender>();
+
+        services.AddSingleton<IPasswordHasher, BCryptPasswordHasher>();
+        services.AddSingleton<IJwtTokenService, JwtTokenService>();
 
         services.AddMemoryCache();
         services.AddSingleton<ICacheService, MemoryCacheService>();
